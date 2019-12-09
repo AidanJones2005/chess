@@ -69,7 +69,7 @@ $(".chessboard").on("click", '.button,.button1', function () {
             pathPiece(piece, "black", "pawn");
             break;
         default:
-            alert("This piece doesn't have an identifier!");
+            console.log("This piece doesn't have an identifier!");
     }
 });
 
@@ -118,293 +118,57 @@ function pathPiece(id, team, type) {
     let irow;
     let icol;
     switch (type) {
-        // this part is self explainitory
+        // this part is self explanatory
         case "rook":
-            pathNESW("n", team, "-1", row, col);
-            pathNESW("e", team, "-1", row, col);
-            pathNESW("s", team, "-1", row, col);
-            pathNESW("w", team, "-1", row, col);
+            pathNESW("n", team, -1, row, col, true);
+            pathNESW("e", team, -1, row, col, true);
+            pathNESW("s", team, -1, row, col, true);
+            pathNESW("w", team, -1, row, col, true);
             break;
         case "bishop":
-            // Highlight to the left side of the bishop
-            console.log("bishop clicked");
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("bishop looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow - 1];
-                let sncol = num[icol - 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol > 0 && abc.indexOf(snrow) > -1) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    continuecheck = false;
-                }
-                irow--;
-                icol--;
-            }
-            // Highlight to the right side of the bishop
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("bishop looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow - 1];
-                let sncol = num[icol + 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol < 9 && abc.indexOf(snrow) > -1) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    continuecheck = false;
-                }
-                irow--;
-                icol++;
-            }
-            // Highlight to the bottom left side of the bishop
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("bishop looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow + 1];
-                let sncol = num[icol - 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol > 0 && abc.indexOf(snrow) < 8) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    continuecheck = false;
-                }
-                irow++;
-                icol--;
-            }
-            // Highlight to the bottom right side of the bishop
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("bishop looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow + 1];
-                let sncol = num[icol + 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol < 9 && abc.indexOf(snrow) < 8) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false br on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    console.log("check return false br excede on " + snrow + ":" + sncol);
-                    continuecheck = false;
-                }
-                irow++;
-                icol++;
-            }
+            pathDiag("ne", team, -1, row, col);
+            pathDiag("nw", team, -1, row, col);
+            pathDiag("se", team, -1, row, col);
+            pathDiag("sw", team, -1, row, col);
             break;
 
         case "queen":
-            // Highlight to the left side of the queen
-            console.log("queen clicked");
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("queen looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow - 1];
-                let sncol = num[icol - 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol > 0 && abc.indexOf(snrow) > -1 && sncol != null && snrow != null) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    continuecheck = false;
-                }
-                irow--;
-                icol--;
-            }
-            // Highlight to the right side of the queen
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("queen looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow - 1];
-                let sncol = num[icol + 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol < 9 && abc.indexOf(snrow) > -1) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    continuecheck = false;
-                }
-                irow--;
-                icol++;
-            }
-            // Highlight to the bottom left side of the queen
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("queen looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow + 1];
-                let sncol = num[icol - 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol > 0 && abc.indexOf(snrow) < 8 && sncol != null && snrow != null) {
-                    console.log(snrow + ":" + sncol);
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    continuecheck = false;
-                }
-                irow++;
-                icol--;
-            }
-            // Highlight to the bottom right side of the queen
-            continuecheck = true;
-            irow = abc.indexOf(row.toString());
-            icol = num.indexOf(col.toString());
-            while (continuecheck) {
-                console.log("queen looping");
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let snrow = abc[irow + 1];
-                let sncol = num[icol + 1];
-                // If there is a piece blocking the path, stop highlighting.
-                if (sncol < 9 && abc.indexOf(snrow) < 8 && sncol != null && snrow != null) {
-                    if (!highlight(snrow.toString() + sncol.toString(), false)) {
-                        console.log("check return false br on " + snrow + ":" + sncol);
-                        if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
-                            continuecheck = false;
-                        } else {
-                            highlight(snrow.toString() + sncol.toString(), true);
-                            continuecheck = false;
-                        }
-                    }
-                } else {
-                    console.log("check return false br excede on " + snrow + ":" + sncol);
-                    continuecheck = false;
-                }
-                irow++;
-                icol++;
-            }
-            // Highlight to the left side of the queen
-            for (var i = num.indexOf(col.toString()) - 1; i > -1; i--) {
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let sn = num[i];
-
-                // If there is a piece blocking the path, stop highlighting.
-                if (!highlight(row.toString() + sn.toString(), false)) {
-                    if ($("#" + row.toString() + sn.toString() + "p").attr("data-piece-type").includes(team)) {
-                        break;
-                    } else {
-                        highlight(row.toString() + sn.toString(), true);
-                        break;
-                    }
-                }
-            }
-
-            // Highlight to the right side of the queen
-            for (var i = num.indexOf(col.toString()) + 1; i < 8; i++) {
-                // Get the current column in the loop, and initialize "sn" (current selected row)
-                let sn = num[i];
-
-                // If there is a piece blocking the path, stop highlighting.
-                if (!highlight(row.toString() + sn.toString(), false)) {
-                    if ($("#" + row.toString() + sn.toString() + "p").attr("data-piece-type").includes(team)) {
-                        break;
-                    } else {
-                        highlight(row.toString() + sn.toString(), true);
-                        break;
-                    }
-                }
-            }
-
-            // Highlight from the queen downwards
-            for (var i = abc.indexOf(row.toString()) + 1; i < 8; i++) {
-                // Get the current row in the loop, and initialize "sn" (current selected row)
-                let sn = abc[i];
-
-                // If there is a piece blocking the path, stop highlighting.
-                if (!highlight(sn.toString() + col.toString(), false)) {
-                    if ($("#" + sn.toString() + col.toString() + "p").attr("data-piece-type").includes(team)) {
-                        break;
-                    } else {
-                        highlight(sn.toString() + col.toString(), true);
-                        break;
-                    }
-                }
-            }
-            // Highlight from the queen upwards
-            for (var i = abc.indexOf(row.toString()) - 1; i > 0; i--) {
-                // Get the current row in the loop, and initialize "sn" (current selected row)
-                let sn = abc[i];
-
-                // If there is a piece blocking the path, stop highlighting.
-                if (!highlight(sn.toString() + col.toString(), false)) {
-                    if ($("#" + sn.toString() + col.toString() + "p").attr("data-piece-type").includes(team)) {
-                        break;
-                    } else {
-                        highlight(sn.toString() + col.toString(), true);
-                        break;
-                    }
-                }
-            }
+            pathDiag("ne", team, -1, row, col);
+            pathDiag("nw", team, -1, row, col);
+            pathDiag("se", team, -1, row, col);
+            pathDiag("sw", team, -1, row, col);
+            pathNESW("n", team, -1, row, col, true);
+            pathNESW("e", team, -1, row, col, true);
+            pathNESW("s", team, -1, row, col, true);
+            pathNESW("w", team, -1, row, col, true);
             break;
+        case "king":
+            pathDiag("ne", team, 1, row, col);
+            pathDiag("nw", team, 1, row, col);
+            pathDiag("se", team, 1, row, col);
+            pathDiag("sw", team, 1, row, col);
+            pathNESW("n", team, 1, row, col, true);
+            pathNESW("e", team, 1, row, col, true);
+            pathNESW("s", team, 1, row, col, true);
+            pathNESW("w", team, 1, row, col, true);
+            break;
+        case "knight":
+            let rowpos = abc.indexOf(row.toString());
+            let colpos = num.indexOf(col.toString());
+            console.log("knight: " + abc[rowpos-2] + num[colpos+1]);
 
+            // Up and down
+            highlight(abc[rowpos-2] + num[colpos+1], true, team);
+            highlight(abc[rowpos-2] + num[colpos-1], true, team);
+            highlight(abc[rowpos+2] + num[colpos+1], true, team);
+            highlight(abc[rowpos+2] + num[colpos-1], true, team);
+
+            // Left and right
+            highlight(abc[rowpos+1] + num[colpos+2], true, team);
+            highlight(abc[rowpos-1] + num[colpos+2], true, team);
+            highlight(abc[rowpos+1] + num[colpos-2], true, team);
+            highlight(abc[rowpos-1] + num[colpos-2], true, team);
+            break;
         default:
             // The piece doesn't have a correct identifier
             console.log("Type is not correct.");
@@ -414,21 +178,17 @@ function pathPiece(id, team, type) {
     // Execute different code based on team
     switch (team) {
         case "white":
-
             switch (type) {
                 // this part is self explainitory
                 case "pawn":
-                    // Highlight the space directly in front of the pawn
-                    if (highlight(abc[abc.indexOf(row) - 1].toString() + col.toString(), false)) {
-                        // If the pawn is in it's starting position, highlight two spaces ahead of it
                         if (row == "G") {
-                            highlight(abc[abc.indexOf(row) - 2].toString() + col.toString(), false);
+                            pathNESW("n", team, 2, row, col, false);
+                        } else {
+                            pathNESW("n", team, 1, row, col, false);
                         }
-                    }
                     break;
                 default:
                     // The piece isn't a pawn
-                    console.log("bad");
                     break;
             }
 
@@ -436,15 +196,14 @@ function pathPiece(id, team, type) {
         case "black":
             switch (type) {
                 case "pawn":
-                    if (highlight(abc[abc.indexOf(row) + 1].toString() + col.toString(), false)) {
-                        if (row == "B") {
-                            highlight(abc[abc.indexOf(row) + 2].toString() + col.toString(), false);
-                        }
+                    if (row == "B") {
+                        pathNESW("s", team, 2, row, col, false);
+                    } else {
+                        pathNESW("s", team, 1, row, col, false);
                     }
                     break;
                 default:
-                    // Piece isnt pawn
-                    console.log("bad");
+                    // Piece isn't pawn
                     break;
             }
 
@@ -455,22 +214,28 @@ function pathPiece(id, team, type) {
     }
 }
 
-function highlight(squid, force) {
+function highlight(squid, attack, team) {
     // Check if space contains piece
-    if ($("#" + squid + "p").length > 0 && force == false) {
+    if ($("#" + squid + "p").length > 0 && attack == false) {
         // Square contains piece, return false
         return false;
     } else {
-        // Square is empty, highlight square and return true
-        if (force) {
-            console.log("force = " + force);
+        // Square is empty or attack == true, highlight square and return true after checking what team occupies the space
+        if ($("#" + squid + "p").length > 0) {
+            if ($("#" + squid + "p").attr("data-piece-type").includes(team)) {
+                return false;
+            } else {
+                $("#" + squid + "s").addClass("active");
+            }
+        } else {
+            $("#" + squid + "s").addClass("active");
+            return true;
         }
-        $("#" + squid + "s").addClass("active");
         return true;
     }
 }
 
-function pathNESW(nesw, team, limit, row, col) {
+function pathNESW(nesw, team, limit, row, col, attack) {
     var op;
     var lim;
     var dir;
@@ -510,27 +275,80 @@ function pathNESW(nesw, team, limit, row, col) {
             break;
     }
     for (var i = loca + dir; eval(i + op + lim); i = i + dir) {
+         if (limit !== 0) {
+             limit--;
+         } else {
+            return;
+         }
         // Get the current row in the loop, and initialize "sn" (current selected row)
         let srow;
         let scol;
         if (nesw == "s" || nesw == "n") {
             srow = list[i];
             scol = col;
-            console.log("vertical " + srow);
         } else {
             srow = row;
             scol = list[i];
-            console.log("horizontal " + scol + " : " + i);
         }
 
         // If there is a piece blocking the path, stop highlighting.
-        if (!highlight(srow.toString() + scol.toString(), false)) {
+        if (!highlight(srow.toString() + scol.toString(), false, team)) {
             if ($("#" + srow.toString() + scol.toString() + "p").attr("data-piece-type").includes(team)) {
                 break;
             } else {
-                highlight(srow.toString() + scol.toString(), true);
+                highlight(srow.toString() + scol.toString(), attack, team);
                 break;
             }
         }
+    }
+}
+function pathDiag(direction, team, limit, row, col) {
+    let dirNS;
+    let dirEW;
+    switch (direction) {
+        case "nw":
+            dirNS = -1;
+            dirEW = -1;
+            break;
+        case "ne":
+            dirNS = -1;
+            dirEW = 1;
+            break;
+        case "sw":
+            dirNS = 1;
+            dirEW = 1;
+            break;
+        case "se":
+            dirNS = 1;
+            dirEW = -1;
+            break;
+    }
+    let continuecheck = true;
+    irow = abc.indexOf(row.toString());
+    icol = num.indexOf(col.toString());
+    while (continuecheck) {
+        if (limit !== 0) {
+            limit--;
+        } else {
+            return;
+        }
+        // Get the current column in the loop, and initialize "sn" (current selected row)
+        let snrow = abc[irow + dirNS];
+        let sncol = num[icol + dirEW];
+        // If there is a piece blocking the path, stop highlighting.
+        if (sncol != null && snrow != null) {
+            if (!highlight(snrow.toString() + sncol.toString(), false, team)) {
+                if ($("#" + snrow.toString() + sncol.toString() + "p").attr("data-piece-type").includes(team)) {
+                    continuecheck = false;
+                } else {
+                    highlight(snrow.toString() + sncol.toString(), true, team);
+                    continuecheck = false;
+                }
+            }
+        } else {
+            continuecheck = false;
+        }
+        irow = irow + dirNS;
+        icol = icol + dirEW;
     }
 }
