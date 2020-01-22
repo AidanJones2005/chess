@@ -61,6 +61,6 @@
 .active {
     background-color: rgba(251, 255, 0, 0.3);
 }
-.black-* {
-     color:black
- }
+[data-piece-team="black"] {
+    color: black;
+}
