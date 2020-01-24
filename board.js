@@ -1,20 +1,23 @@
-let board = {
-    loadPieces: function(){
+let board = new Board();
+function Board() {
+    const obj = {};
+    obj.pieces = [];
+    obj.loadPieces = function(){
         $.getJSON( "board.json", function( data ) {
-            board = data;
+            boardData = data;
             $.each(data, function (key, val) {
                 let genteam = key;
                 $.each(val, function (key, val) {
                     let coords = val["y"] + val["x"];
                     $("#" + coords + "s").html("<button class=\"button\" data-piece-name=\"" + key + "\" data-piece-team='" + genteam + "' data-piece-type=\"" + val["type"] + "\" id=\"" + coords + "p\">" + unicode[val["type"]] + "</button>");
                     console.log(coords);
-                    this.pieces.push(new piece(val["x"], val["y"], val["type"], genteam));
+                    obj.pieces.push(new piece(val["x"], val["y"], val["type"], genteam));
                 });
             });
         });
-    },
-    turn: 0,
-    switchTurn: function(){
+    };
+    obj.turn = 0;
+    obj.switchTurn = function(){
         switch(this.turn) {
             case 0:
                 this.turn = 1;
@@ -23,6 +26,6 @@ let board = {
                 this.turn = 2;
                 break;
         }
-    },
-    pieces: []
-};
+    };
+    return obj;
+}
