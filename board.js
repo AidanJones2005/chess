@@ -1,4 +1,5 @@
 let board = new Board();
+board.loadPieces();
 function Board() {
     const obj = {};
     obj.pieces = [];
@@ -11,7 +12,7 @@ function Board() {
                     let coords = val["y"] + val["x"];
                     $("#" + coords + "s").html("<button class=\"button\" data-piece-name=\"" + key + "\" data-piece-team='" + genteam + "' data-piece-type=\"" + val["type"] + "\" id=\"" + coords + "p\">" + unicode[val["type"]] + "</button>");
                     console.log(coords);
-                    obj.pieces.push(new piece(val["x"], val["y"], val["type"], genteam));
+                    obj.pieces.push(new BoardPiece(val["x"], val["y"], val["type"], genteam));
                 });
             });
         });

@@ -5,11 +5,13 @@ let square;
 // Substring of the variable piece, row of the currently selected piece
 let row;
 
+let piece;
+
 // Substring of the variable piece, column of the currently selected piece
 let col;
 
 // Store all of the board's data
-let boardData;
+let boardData = [];
 
 // Array of row ids
 var abc = ["A", "B", "C", "D", "E", "F", "G", "H"];
@@ -29,7 +31,6 @@ const unicode = {
     "king": "&#9812;",
     "pawn": "&#9817;"
 }
-
 // Detect when a chess piece is clicked
 $(".chessboard").on("click", '.button,.button1', function () {
     // Get the ID of the piece that was clicked
@@ -54,8 +55,10 @@ $(".square").click(function (event) {
 
     // Check if the square selected is highlighted (meaning that it has been checked and is a valid place to move to.)
     if ($("#" + square + "s").hasClass("active")) {
+        boardData[$("#" + piece + "p").attr("data-piece-team")][$("#" + piece + "p").attr("data-piece-name")]["x"] = square.substring(1, 2);
+        boardData[$("#" + piece + "p").attr("data-piece-team")][$("#" + piece + "p").attr("data-piece-name")]["y"] = square.substring(0, 1);
         if ($("#" + square + "p").length > 0) {
-            delete board[$(event.target).attr("data-piece-team")][$(event.target).attr("data-piece-name")];
+            delete boardData[$(event.target).attr("data-piece-team")][$(event.target).attr("data-piece-name")];
         }
         // Set the selected square to the selected piece
         $("#" + square + "s").html($("#" + piece + "s").html());
@@ -68,9 +71,8 @@ $(".square").click(function (event) {
 
         // Unhighlight all highlighted squares
         $(".active").removeClass("active");
-        console.log($(event.target).attr("data-piece-name"));
-        board[$(event.target).attr("data-piece-team")][$(event.target).attr("data-piece-name")]["x"] = square.substring(1, 2);
-        board[$(event.target).attr("data-piece-team")][$(event.target).attr("data-piece-name")]["y"] = square.substring(0, 1);
+        console.log(piece);
+
         // Disselect piece
         piece = "";
     }
