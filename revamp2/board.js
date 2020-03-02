@@ -9,7 +9,7 @@ function Board() {
         for (let yi=0; yi<=y; yi++) {
             obj.squares[yi] = [];
             for (let xi = 0; xi <= x; xi++) {
-                obj.squares[yi][xi] = new Square(xi, yi, color, obj);
+                obj.squares[yi][xi] = new Square(xi, yi, color);
                 color = !color;
             }
             color = !color;
@@ -27,7 +27,7 @@ function Board() {
                 // Loop through pieces in team
                 $.each(val, function (key, val) {
                     let coords = val["y"] + val["x"];
-                    obj.team[team].piece[key] = new Piece(val["x"], val["y"], val["type"]);
+                    obj.team[team].piece[key] = new Piece(val["x"], val["y"], val["type"], team);
                 });
             });
         });

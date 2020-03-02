@@ -12,5 +12,8 @@ function Square(x, y, color) {
     square.addClass([color ? "white" : "black", "square"]);
     $(".chessboard").append(square);
     obj.elem = $("#" + obj.id);
+    obj.append = function(html) {
+      obj.elem.append(html);
+    };
     return obj;
 }
