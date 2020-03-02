@@ -3,164 +3,164 @@
     "rook1": {
       "type": "rook",
       "x": "1",
-      "y": "H"
+      "y": "8"
     },
     "knight1": {
       "type": "knight",
       "x": "2",
-      "y": "H"
+      "y": "8"
     },
     "bishop1": {
       "type": "bishop",
       "x": "3",
-      "y": "H"
+      "y": "8"
     },
     "queen": {
       "type": "queen",
       "x": "4",
-      "y": "H"
+      "y": "8"
     },
     "king": {
       "type": "king",
       "x": "5",
-      "y": "H"
+      "y": "8"
     },
     "bishop2": {
       "type": "bishop",
       "x": "6",
-      "y": "H"
+      "y": "8"
     },
     "knight2": {
       "type": "knight",
       "x": "7",
-      "y": "H"
+      "y": "8"
     },
     "rook2": {
       "type": "rook",
       "x": "8",
-      "y": "H"
+      "y": "8"
     },
     "pawn1": {
       "type": "pawn",
       "x": "1",
-      "y": "G"
+      "y": "7"
     },
     "pawn2": {
       "type": "pawn",
       "x": "2",
-      "y": "G"
+      "y": "7"
     },
     "pawn3": {
       "type": "pawn",
       "x": "3",
-      "y": "G"
+      "y": "7"
     },
     "pawn4": {
       "type": "pawn",
       "x": "4",
-      "y": "G"
+      "y": "7"
     },
     "pawn5": {
       "type": "pawn",
       "x": "5",
-      "y": "G"
+      "y": "7"
     },
     "pawn6": {
       "type": "pawn",
       "x": "6",
-      "y": "G"
+      "y": "7"
     },
     "pawn7": {
       "type": "pawn",
       "x": "7",
-      "y": "G"
+      "y": "7"
     },
     "pawn8": {
       "type": "pawn",
       "x": "8",
-      "y": "G"
+      "y": "7"
     }
   },
   "black": {
     "rook1": {
       "type": "rook",
       "x": "1",
-      "y": "A"
+      "y": "1"
     },
     "knight1": {
       "type": "knight",
       "x": "2",
-      "y": "A"
+      "y": "1"
     },
     "bishop1": {
       "type": "bishop",
       "x": "3",
-      "y": "A"
+      "y": "1"
     },
     "queen": {
       "type": "queen",
       "x": "4",
-      "y": "A"
+      "y": "1"
     },
     "king": {
       "type": "king",
       "x": "5",
-      "y": "A"
+      "y": "1"
     },
     "bishop2": {
       "type": "bishop",
       "x": "6",
-      "y": "A"
+      "y": "1"
     },
     "knight2": {
       "type": "knight",
       "x": "7",
-      "y": "A"
+      "y": "1"
     },
     "rook2": {
       "type": "rook",
       "x": "8",
-      "y": "A"
+      "y": "1"
     },
     "pawn1": {
       "type": "pawn",
       "x": "1",
-      "y": "B"
+      "y": "2"
     },
     "pawn2": {
       "type": "pawn",
       "x": "2",
-      "y": "B"
+      "y": "2"
     },
     "pawn3": {
       "type": "pawn",
       "x": "3",
-      "y": "B"
+      "y": "2"
     },
     "pawn4": {
       "type": "pawn",
       "x": "4",
-      "y": "B"
+      "y": "2"
     },
     "pawn5": {
       "type": "pawn",
       "x": "5",
-      "y": "B"
+      "y": "2"
     },
     "pawn6": {
       "type": "pawn",
       "x": "6",
-      "y": "B"
+      "y": "2"
     },
     "pawn7": {
       "type": "pawn",
       "x": "7",
-      "y": "B"
+      "y": "2"
     },
     "pawn8": {
       "type": "pawn",
       "x": "8",
-      "y": "B"
+      "y": "2"
     }
   }
 }

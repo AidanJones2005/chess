@@ -6,26 +6,12 @@
     border: 25px solid #333;
 }
 
-.black {
-    float: left;
-    width: 80px;
-    height: 80px;
-    background-color: #787878;
-    font-size: 50px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+.square.white {
+    background-color:grey;
 }
 
-.white {
-    float: left;
-    width: 80px;
-    height: 80px;
-    background-color: lightgrey;
-    font-size: 50px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+.square.black {
+    background-color:black;
 }
 
 .button1 {
@@ -52,7 +38,6 @@
     float: left;
     width: 80px;
     height: 80px;
-    background-color: transparent;
     font-size: 50px;
     text-align: center;
     display: table-cell;
